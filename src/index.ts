@@ -19,8 +19,6 @@ for (const folder of commandFolders) {
 	for (const file of commandFiles) {
 		const filePath = path.join(commandsPath, file);
 		const command = require(filePath);
-		console.log(filePath);
-		console.log(command.data.name);
 		if ('data' in command && 'execute' in command) {
 			client.commands.set(`${command.data.name}`, command);
 		} else {
@@ -34,7 +32,6 @@ const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.ts'
 for (const file of eventFiles) {
 	const filePath = path.join(eventsPath, file);
 	const event = require(filePath);
-	console.log(event);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
