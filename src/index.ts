@@ -1,18 +1,14 @@
 // Require the necessary discord.js classes
 import { Client, Events, GatewayIntentBits, Collection, MessageFlags } from 'discord.js';
-
+import {} from './types/discordjs'
 import path from 'node:path';
 import fs from 'node:fs';
 require('dotenv').config();
 
+
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+export const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
-declare module "discord.js" {
-	export interface Client {
-		commands: Collection<unknown, any>
-	}
-}
 
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
@@ -38,6 +34,7 @@ const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.ts'
 for (const file of eventFiles) {
 	const filePath = path.join(eventsPath, file);
 	const event = require(filePath);
+	console.log(event);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
@@ -46,3 +43,4 @@ for (const file of eventFiles) {
 }
 
 client.login(process.env.TOKEN);
+
