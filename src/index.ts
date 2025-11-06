@@ -1,13 +1,28 @@
 // Require the necessary discord.js classes
-import { Client, Events, GatewayIntentBits, Collection, MessageFlags } from 'discord.js';
+import {
+  Client,
+  GatewayIntentBits,
+  Partials,
+  Message,
+  GuildMember,
+  TextChannel,
+	Collection
+} from 'discord.js';
 import {} from './types/discordjs'
 import path from 'node:path';
 import fs from 'node:fs';
-require('dotenv').config();
-
+import dotenv from 'dotenv';
+dotenv.config();
+const LOG_CHANNEL_ID = process.env.LOG_CHANNEL_ID ?? '';
 
 // Create a new client instance
-export const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+export const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
 client.commands = new Collection();
 
 const foldersPath = path.join(__dirname, 'commands');
@@ -32,6 +47,7 @@ const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.ts'
 for (const file of eventFiles) {
 	const filePath = path.join(eventsPath, file);
 	const event = require(filePath);
+	console.log(event);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
@@ -40,4 +56,3 @@ for (const file of eventFiles) {
 }
 
 client.login(process.env.TOKEN);
-
