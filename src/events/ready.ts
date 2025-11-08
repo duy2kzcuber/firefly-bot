@@ -44,7 +44,7 @@ module.exports = {
 				}
 			}
 			//Xóa role
-			violationModel.find({
+			violationModel.deleteMany({
 				userId: {$in: listUnmuteUserIds}
 			});
       console.log('✅ Quét DB xong');
