@@ -5,6 +5,6 @@ module.exports = {
 		.setName('ping')
 		.setDescription('Replies with Pong!'),
 	async execute(interaction: { reply: (arg0: string) => any; }) {
-		await interaction.reply('<@!1007132741629915158> beo vcl');
+		await interaction.reply('pong');
 	},
 };

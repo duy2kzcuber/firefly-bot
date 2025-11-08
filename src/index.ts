@@ -12,6 +12,7 @@ import {} from './types/discordjs'
 import path from 'node:path';
 import fs from 'node:fs';
 import dotenv from 'dotenv';
+import * as database from "./config/database";
 dotenv.config();
 const LOG_CHANNEL_ID = process.env.LOG_CHANNEL_ID ?? '';
 
@@ -24,7 +25,7 @@ export const client = new Client({
   ],
 });
 client.commands = new Collection();
-
+database.connect();
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 

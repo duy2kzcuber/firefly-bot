@@ -1,7 +1,9 @@
 import { EmbedBuilder, Events, GuildMember, TextChannel } from 'discord.js';
 
 const LOG_CHANNEL_ID = process.env.LOG_CHANNEL_ID ?? '';
-
+/*
+Todo: tìm cách fix phần này
+*/
 module.exports = {
   name: Events.GuildMemberAdd,
   async execute(member: GuildMember) {
