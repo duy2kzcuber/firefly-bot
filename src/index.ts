@@ -13,6 +13,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import dotenv from 'dotenv';
 import * as database from "./config/database";
+import express from 'express';
 dotenv.config();
 const LOG_CHANNEL_ID = process.env.LOG_CHANNEL_ID ?? '';
 
@@ -55,5 +56,17 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+const app = express();
+const PORT = 3000;
+
+app.get('/', (req, res) => {
+  res.send('✅ Bot Discord đang hoạt động!');
+});
+
+app.listen(PORT, () => {
+  console.log(`🌐 Server đang chạy tại http://localhost:${PORT}`);
+});
 
 client.login(process.env.TOKEN);
+
+

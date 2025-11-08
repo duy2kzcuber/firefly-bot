@@ -1,5 +1,5 @@
 import { ClientUser, Events} from 'discord.js';
-import violationModel from '../models/violationModel';
+import violationModel from '../models/ViolationModel'
 import * as database from "../config/database";
 import { VIOLATION_ENUM } from '../constant/ViolationTypeEnum';
 module.exports = {

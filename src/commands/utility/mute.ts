@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction,EmbedBuilder, MessageFlags, SlashCommandBuilder, InteractionReplyOptions, PermissionFlagsBits } from 'discord.js';
 import {VIOLATION_ENUM } from '../../constant/ViolationTypeEnum';
-import ViolationModel from '../../models/violationModel'; 
+import ViolationModel from '../../models/ViolationModel'; 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('mute')
